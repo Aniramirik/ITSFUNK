@@ -3,367 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITSFUNK</title>
+    <title>Music Player</title>
     <style>
+        /* Basic CSS for styling */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #fff;
-        }
-
-        /* Main Container */
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 240px;
-            background-color: #000;
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
         }
-
-        .sidebar h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #1db954;
-        }
-
-        .sidebar nav a {
-            display: block;
-            color: #b3b3b3;
-            text-decoration: none;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .sidebar nav a:hover {
-            color: #fff;
-        }
-
-        /* Content */
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #1db954;
-            padding-bottom: 10px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .grid-item {
-            background-color: #181818;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
-
-        .grid-item:hover {
-            background-color: #282828;
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .grid-item p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        /* Player */
         .player {
-            position: fixed;
-            bottom: 0;
-            width: calc(100% - 240px);
-            background-color: #181818;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
         }
-
-        .player img {
-            width: 60px;
-            height: 60px;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
-
-        .player .song-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .player .song-info p {
-            margin: 0;
-        }
-
-        .player .song-info p.title {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .player .song-info p.artist {
-            font-size: 14px;
-            color: #b3b3b3;
-        }
-
-        .player audio {
+        .cover {
             width: 300px;
+            height: 300px;
+            margin: 0 auto;
         }
-
-        .player button {
-            background-color: #1db954;
-            border: none;
-            padding: 10px;
-            margin: 0 5px;
-            color: white;
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .creators {
+            margin-top: 40px;
+            text-align: left;
+        }
+        .creators img {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            object-fit: cover;
+            margin-right: 10px;
         }
-
-        .player button:hover {
-            background-color: #1ed760;
-        }
-
-        .player button:focus {
-            outline: none;
-        }
-
-        /* Profile View */
-        .profile-view {
-            display: none;
-        }
-
-        .profile-view img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .profile-view h3 {
-            margin: 0;
-            font-size: 24px;
+        .creator-info {
+            display: flex;
+            align-items: center;
             margin-bottom: 10px;
-        }
-
-        .profile-view p {
-            margin: 0;
-            font-size: 18px;
-            color: #b3b3b3;
-            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="sidebar">
-        <h1>ITSFUNK</h1>
-        <nav>
-            <a href="#" onclick="showSection('catalog')">Music Catalog</a>
-            <a href="#" onclick="showSection('playlists')">My Playlists</a>
-            <a href="#" onclick="showSection('creators')">Discover Creators</a>
-        </nav>
-    </div>
-
-    <div class="content">
-        <div id="catalog" class="section">
-            <h2>Music Catalog(More out soon)</h2>
-            <div class="grid">
-                <!-- Music catalog items will be inserted here -->
-            </div>
+    <div class="player">
+        <div class="cover">
+            <img id="cover-image" src="IMG_0014.jpeg" alt="Cover">
         </div>
-
-        <div id="playlists" class="section" style="display:none;">
-            <h2>My Playlists</h2>
-            <div>
-                <input type="text" id="playlist-name" placeholder="New Playlist Name" style="width: calc(100% - 100px); padding: 10px;">
-                <button onclick="createPlaylist()" style="width: 80px; background-color: #1db954; color: white; border: none; border-radius: 20px;">Create</button>
-            </div>
-            <div class="grid" id="playlists-grid">
-                <!-- Playlists will be inserted here -->
-            </div>
-        </div>
-
-        <div id="creators" class="section" style="display:none;">
-            <h2>Discover Creators</h2>
-            <div class="grid">
-                <!-- Creator profiles will be inserted here -->
-            </div>
-        </div>
-
-        <div id="profile" class="profile-view">
-            <img id="profile-pic" src="" alt="Profile Picture">
-            <h3 id="profile-name">Creator Name</h3>
-            <p id="profile-desc">Music added by this creator:</p>
-            <div class="grid" id="profile-music">
-                <!-- Music by the selected creator will be inserted here -->
-            </div>
+        <h2 id="song-title">FE!N</h2>
+        <p id="artist-name">Travis Scott</p>
+        <div class="controls">
+            <audio id="audio" controls>
+                <source id="audio-source" src="Fein-(PagalWorld).mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
         </div>
     </div>
-</div>
 
-<div class="player">
-    <div class="song-info">
-        <img id="album-cover" src="https://via.placeholder.com/60" alt="Album Cover">
-        <div>
-            <p class="title" id="song-title">No song selected</p>
-            <p class="artist" id="song-artist">---</p>
+    <div class="creators">
+        <h3>Discover Creators</h3>
+        <div id="creator-list">
+            <!-- Creator list will be populated here -->
         </div>
     </div>
-    <audio id="audio-player" controls></audio>
-    <button onclick="prevSong()">&#9664;</button>
-    <button onclick="nextSong()">&#9654;</button>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.min.js"></script>
-<script>
-    const catalog = [
-    { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
-    { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" },
-    { name: "World hold on (Themba)", src: "spotifydown.com - World Hold On - THEMBA Remix.mp3", cover: "IMG_0016.jpeg", artist: "Themba" },
-    { name: "Guess featuring Billie Eilish", src: "spotifydown.com - Guess featuring Billie Eilish.mp3", cover: "IMG_0021.jpeg", artist: "Charli XCX" },
-    { name: "KEHLANI", src: "spotifydown.com - KEHLANI.mp3", cover: "IMG_0022.jpeg", artist: "Jordan Adetunji" },
-    { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" },
-    { name: "Big Dawgs", src: "spotifydown.com - Big Dawgs.mp3", cover: "IMG_0023.jpeg", artist: "Hanumankind, Kalmi" },
-    { name: "Slime Me Up", src: "spotifydown.com - Slime Me Up.mp3", cover: "/mnt/data/cover-image-for-slime.jpg", artist: "Artist Name" }, // Update the artist and cover as needed
-    { name: "Barbie Girl", src: "spotifydown.com - Barbie Girl.mp3", cover: "/mnt/data/CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg", artist: "Aqua" }
-];
+    <script>
+        // Catalog of songs
+        const catalog = [
+            { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
+            { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" },
+            { name: "World hold on (Themba)", src: "spotifydown.com - World Hold On - THEMBA Remix.mp3", cover: "IMG_0016.jpeg", artist: "Themba" },
+            { name: "Guess featuring Billie Eilish", src: "spotifydown.com - Guess featuring Billie Eilish.mp3", cover: "IMG_0021.jpeg", artist: "Charli XCX" },
+            { name: "KEHLANI", src: "spotifydown.com - KEHLANI.mp3", cover: "IMG_0022.jpeg", artist: "Jordan Adetunji" },
+            { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" },
+            { name: "Big Dawgs", src: "spotifydown.com - Big Dawgs.mp3", cover: "IMG_0023.jpeg", artist: "Hanumankind, Kalmi" },
+            { name: "Slime Me Up", src: "/mnt/data/spotifydown.com - Slime Me Up.mp3", cover: "/mnt/data/cover-image-for-slime.jpg", artist: "Artist Name" }, // Update the artist and cover as needed
+            { name: "Barbie Girl", src: "/mnt/data/spotifydown.com - Barbie Girl.mp3", cover: "/mnt/data/CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg", artist: "Aqua" }
+        ];
 
-const creators = [
-    { name: "Travis Scott", picture: "IMG_0014.jpeg", music: ["FE!N"] },
-    { name: "SZA", picture: "IMG_0015.jpeg", music: ["All The Stars"] },
-    { name: "Themba", picture: "IMG_0016.jpeg", music: ["World hold on (Themba)"] },
-    { name: "Charli XCX", picture: "IMG_0021.jpeg", music: ["Guess featuring Billie Eilish"] },
-    { name: "Jordan Adetunji", picture: "IMG_0022.jpeg", music: ["KEHLANI"] },
-    { name: "Taylor Swift", picture: "IMG_0020.jpeg", music: ["Cruel Summer"] },
-    { name: "Hanumankind, Kalmi", picture: "IMG_0023.jpeg", music: ["Big Dawgs"] },
-    { name: "Artist Name", picture: "/mnt/data/cover-image-for-slime.jpg", music: ["Slime Me Up"] }, // Update the name and picture as needed
-    { name: "Aqua", picture: "CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg", music: ["Barbie Girl"] }
-];
-    ];
+        // List of creators
+        const creators = [
+            { name: "Travis Scott", picture: "IMG_0014.jpeg", music: ["FE!N"] },
+            { name: "SZA", picture: "IMG_0015.jpeg", music: ["All The Stars"] },
+            { name: "Themba", picture: "IMG_0016.jpeg", music: ["World hold on (Themba)"] },
+            { name: "Charli XCX", picture: "IMG_0021.jpeg", music: ["Guess featuring Billie Eilish"] },
+            { name: "Jordan Adetunji", picture: "IMG_0022.jpeg", music: ["KEHLANI"] },
+            { name: "Taylor Swift", picture: "IMG_0020.jpeg", music: ["Cruel Summer"] },
+            { name: "Hanumankind, Kalmi", picture: "IMG_0023.jpeg", music: ["Big Dawgs"] },
+            { name: "Artist Name", picture: "/mnt/data/cover-image-for-slime.jpg", music: ["Slime Me Up"] }, // Update the name and picture as needed
+            { name: "Aqua", picture: "/mnt/data/CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg", music: ["Barbie Girl"] }
+        ];
 
-    let currentSongIndex = 0;
+        // Initialize the music player with the first song
+        const audioElement = document.getElementById('audio');
+        const coverImage = document.getElementById('cover-image');
+        const songTitle = document.getElementById('song-title');
+        const artistName = document.getElementById('artist-name');
+        const audioSource = document.getElementById('audio-source');
 
-    // Populate music catalog
-    const catalogGrid = document.querySelector('#catalog .grid');
-    catalog.forEach((song, index) => {
-        const item = document.createElement('div');
-        item.classList.add('grid-item');
-        item.innerHTML = `
-            <img src="${song.cover}" alt="${song.name}">
-            <p>${song.name}</p>
-            <p>${song.artist}</p>
-        `;
-        item.onclick = () => playSong(index);
-        catalogGrid.appendChild(item);
-    });
-
-    // Populate creators grid
-    const creatorsGrid = document.querySelector('#creators .grid');
-    creators.forEach((creator, index) => {
-        const item = document.createElement('div');
-        item.classList.add('grid-item');
-        item.innerHTML = `
-            <img src="${creator.profilePic}" alt="${creator.name}">
-            <p>${creator.name}</p>
-        `;
-        item.onclick = () => showProfile(index);
-        creatorsGrid.appendChild(item);
-    });
-
-    function playSong(index) {
-        const song = catalog[index];
-        currentSongIndex = index;
-
-        document.getElementById('song-title').innerText = song.name;
-        document.getElementById('song-artist').innerText = song.artist;
-        document.getElementById('album-cover').src = song.cover;
-        document.getElementById('audio-player').src = song.src;
-        document.getElementById('audio-player').play();
-    }
-
-    function prevSong() {
-        if (currentSongIndex > 0) {
-            playSong(currentSongIndex - 1);
+        function loadSong(song) {
+            audioSource.src = song.src;
+            coverImage.src = song.cover;
+            songTitle.textContent = song.name;
+            artistName.textContent = song.artist;
+            audioElement.load();
         }
-    }
 
-    function nextSong() {
-        if (currentSongIndex < catalog.length - 1) {
-            playSong(currentSongIndex + 1);
-        }
-    }
+        // Load the first song on page load
+        loadSong(catalog[0]);
 
-    function showSection(section) {
-        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-        document.querySelectorAll('.profile-view').forEach(p => p.style.display = 'none');
-        document.getElementById(section).style.display = 'block';
-    }
+        // Populate the creators list
+        const creatorList = document.getElementById('creator-list');
 
-    function showProfile(index) {
-        const creator = creators[index];
-        const profileView = document.getElementById('profile');
-        const profileMusicGrid = document.getElementById('profile-music');
+        creators.forEach(creator => {
+            const creatorDiv = document.createElement('div');
+            creatorDiv.classList.add('creator-info');
 
-        document.getElementById('profile-pic').src = creator.profilePic;
-        document.getElementById('profile-name').innerText = creator.name;
-        profileMusicGrid.innerHTML = ''; // Clear previous songs
+            const creatorImg = document.createElement('img');
+            creatorImg.src = creator.picture;
 
-        creator.songs.forEach(song => {
-            const item = document.createElement('div');
-            item.classList.add('grid-item');
-            item.innerHTML = `
-                <img src="${song.cover}" alt="${song.name}">
-                <p>${song.name}</p>
-                <p>${song.artist}</p>
-            `;
-            item.onclick = () => playSong(catalog.findIndex(c => c.src === song.src));
-            profileMusicGrid.appendChild(item);
+            const creatorName = document.createElement('p');
+            creatorName.textContent = creator.name;
+
+            creatorDiv.appendChild(creatorImg);
+            creatorDiv.appendChild(creatorName);
+
+            creatorDiv.addEventListener('click', () => {
+                const creatorSongs = catalog.filter(song => creator.music.includes(song.name));
+                if (creatorSongs.length > 0) {
+                    loadSong(creatorSongs[0]);
+                }
+            });
+
+            creatorList.appendChild(creatorDiv);
         });
-
-        profileView.style.display = 'block';
-        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    }
-
-    function createPlaylist() {
-        const playlistName = document.getElementById('playlist-name').value;
-        if (playlistName) {
-            const playlistGrid = document.getElementById('playlists-grid');
-            const playlist = document.createElement('div');
-            playlist.classList.add('grid-item');
-            playlist.innerText = playlistName;
-            playlistGrid.appendChild(playlist);
-        }
-    }
-</script>
+    </script>
 </body>
 </html>
