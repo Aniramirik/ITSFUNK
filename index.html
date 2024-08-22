@@ -3,147 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITSFUNK</title>
+    <title>Spotify-Like Music Player</title>
     <style>
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
             background-color: #121212;
-            color: #FFFFFF;
+            color: #fff;
+        }
+
+        /* Main Container */
+        .container {
             display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
-            flex-direction: column;
         }
 
-        .player-container {
-            width: 300px;
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background-color: #000;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1db954;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #b3b3b3;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .sidebar nav a:hover {
+            color: #fff;
+        }
+
+        /* Content */
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1db954;
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .grid-item {
+            background-color: #181818;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
+            transition: background-color 0.3s;
+            cursor: pointer;
         }
 
-        .album-cover {
+        .grid-item:hover {
+            background-color: #282828;
+        }
+
+        .grid-item img {
             width: 100%;
             height: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
 
-        .song-info {
-            margin-bottom: 20px;
+        .grid-item p {
+            margin: 0;
+            font-size: 14px;
         }
 
-        .song-info h2, .song-info h3 {
-            margin: 5px 0;
-        }
-
-        .controls {
+        /* Player */
+        .player {
+            position: fixed;
+            bottom: 0;
+            width: calc(100% - 240px);
+            background-color: #181818;
+            padding: 15px 20px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .player img {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .player .song-info {
+            display: flex;
             align-items: center;
         }
 
-        .controls button {
-            background-color: #1DB954;
+        .player .song-info p {
+            margin: 0;
+        }
+
+        .player .song-info p.title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .player .song-info p.artist {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        .player audio {
+            width: 300px;
+        }
+
+        .player button {
+            background-color: #1db954;
             border: none;
             padding: 10px;
+            margin: 0 5px;
+            color: white;
             border-radius: 50%;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .player button:hover {
+            background-color: #1ed760;
+        }
+
+        .player button:focus {
             outline: none;
         }
 
-        .controls img {
-            width: 20px;
-            height: 20px;
+        /* Profile View */
+        .profile-view {
+            display: none;
+        }
+
+        .profile-view img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .profile-view h3 {
+            margin: 0;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-view p {
+            margin: 0;
+            font-size: 18px;
+            color: #b3b3b3;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-<div class="player-container">
-    <img id="album-cover" class="album-cover" src="https://via.placeholder.com/300" alt="Album Cover">
-    <div class="song-info">
-        <h2 id="song-title">Song Title</h2>
-        <h3 id="artist-name">Artist Name</h3>
+<div class="container">
+    <div class="sidebar">
+        <h1>Spotify</h1>
+        <nav>
+            <a href="#" onclick="showSection('catalog')">Music Catalog</a>
+            <a href="#" onclick="showSection('playlists')">My Playlists</a>
+            <a href="#" onclick="showSection('creators')">Discover Creators</a>
+        </nav>
     </div>
-    <div class="controls">
-        <button id="prev-btn">
-            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/rewind.png" alt="Previous">
-        </button>
-        <button id="play-btn">
-            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/play.png" alt="Play">
-        </button>
-        <button id="next-btn">
-            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/fast-forward.png" alt="Next">
-        </button>
+
+    <div class="content">
+        <div id="catalog" class="section">
+            <h2>Music Catalog</h2>
+            <div class="grid">
+                <!-- Music catalog items will be inserted here -->
+            </div>
+        </div>
+
+        <div id="playlists" class="section" style="display:none;">
+            <h2>My Playlists</h2>
+            <div>
+                <input type="text" id="playlist-name" placeholder="New Playlist Name" style="width: calc(100% - 100px); padding: 10px;">
+                <button onclick="createPlaylist()" style="width: 80px; background-color: #1db954; color: white; border: none; border-radius: 20px;">Create</button>
+            </div>
+            <div class="grid" id="playlists-grid">
+                <!-- Playlists will be inserted here -->
+            </div>
+        </div>
+
+        <div id="creators" class="section" style="display:none;">
+            <h2>Discover Creators</h2>
+            <div class="grid">
+                <!-- Creator profiles will be inserted here -->
+            </div>
+        </div>
+
+        <div id="profile" class="profile-view">
+            <img id="profile-pic" src="" alt="Profile Picture">
+            <h3 id="profile-name">Creator Name</h3>
+            <p id="profile-desc">Music added by this creator:</p>
+            <div class="grid" id="profile-music">
+                <!-- Music by the selected creator will be inserted here -->
+            </div>
+        </div>
     </div>
 </div>
 
-<script>
-    let currentSong = null;
+<div class="player">
+    <div class="song-info">
+        <img id="album-cover" src="https://via.placeholder.com/60" alt="Album Cover">
+        <div>
+            <p class="title" id="song-title">No song selected</p>
+            <p class="artist" id="song-artist">---</p>
+        </div>
+    </div>
+    <audio id="audio-player" controls></audio>
+    <button onclick="prevSong()">&#9664;</button>
+    <button onclick="nextSong()">&#9654;</button>
+</div>
 
-    const songs = [
-        {
-            title: 'Slime Me Up',
-            artist: 'Artist Name 1',
-            src: 'spotifydown.com - Slime Me Up.mp3',
-            cover: 'https://via.placeholder.com/300'
-        },
-        {
-            title: 'Barbie Girl',
-            artist: 'Aqua',
-            src: 'spotifydown.com - Barbie Girl.mp3',
-            cover: 'CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg'
-        }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.min.js"></script>
+<script>
+    const catalog = [
+        { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
+        { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" },
+        { name: "World hold on (Themba)", src: "spotifydown.com - World Hold On - THEMBA Remix.mp3", cover: "IMG_0016.jpeg", artist: "Themba" },
+        { name: "Guess featuring Billie Eilish", src: "spotifydown.com - Guess featuring Billie Eilish.mp3", cover: "IMG_0021.jpeg", artist: "Charli XCX" },
+        { name: "KEHLANI", src: "spotifydown.com - KEHLANI.mp3", cover: "IMG_0022.jpeg", artist: "Jordan Adetunji" },
+        { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" },
+        { name: "Big Dawgs", src: "spotifydown.com - Big Dawgs.mp3", cover: "IMG_0023.jpeg", artist: "Hanumankind, Kalmi" },
     ];
 
-    let songIndex = 0;
+    const creators = [
+        {
+            name: "Travis Scott",
+            profilePic: "IMG_0017.jpeg",
+            songs: [
+                { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" }
+            ]
+        },
+        {
+            name: "SZA",
+            profilePic: "IMG_0018.jpeg",
+            songs: [
+                { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" }
+            ]
+        },
+        {
+            name: "Taylor Swift",
+            profilePic: "IMG_0019.jpeg",
+            songs: [
+                { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" }
+            ]
+        },
+    ];
 
-    function loadSong(song) {
-        document.getElementById('song-title').textContent = song.title;
-        document.getElementById('artist-name').textContent = song.artist;
+    let currentSongIndex = 0;
+
+    // Populate music catalog
+    const catalogGrid = document.querySelector('#catalog .grid');
+    catalog.forEach((song, index) => {
+        const item = document.createElement('div');
+        item.classList.add('grid-item');
+        item.innerHTML = `
+            <img src="${song.cover}" alt="${song.name}">
+            <p>${song.name}</p>
+            <p>${song.artist}</p>
+        `;
+        item.onclick = () => playSong(index);
+        catalogGrid.appendChild(item);
+    });
+
+    // Populate creators grid
+    const creatorsGrid = document.querySelector('#creators .grid');
+    creators.forEach((creator, index) => {
+        const item = document.createElement('div');
+        item.classList.add('grid-item');
+        item.innerHTML = `
+            <img src="${creator.profilePic}" alt="${creator.name}">
+            <p>${creator.name}</p>
+        `;
+        item.onclick = () => showProfile(index);
+        creatorsGrid.appendChild(item);
+    });
+
+    function playSong(index) {
+        const song = catalog[index];
+        currentSongIndex = index;
+
+        document.getElementById('song-title').innerText = song.name;
+        document.getElementById('song-artist').innerText = song.artist;
         document.getElementById('album-cover').src = song.cover;
-        if (currentSong) {
-            currentSong.pause();
+        document.getElementById('audio-player').src = song.src;
+        document.getElementById('audio-player').play();
+    }
+
+    function prevSong() {
+        if (currentSongIndex > 0) {
+            playSong(currentSongIndex - 1);
         }
-        currentSong = new Audio(song.src);
     }
 
-    function playSong() {
-        currentSong.play();
-    }
-
-    function pauseSong() {
-        currentSong.pause();
-    }
-
-    document.getElementById('play-btn').addEventListener('click', () => {
-        const isPlaying = currentSong && !currentSong.paused;
-        if (isPlaying) {
-            pauseSong();
-            document.getElementById('play-btn').innerHTML = '<img src="https://img.icons8.com/ios-glyphs/30/ffffff/play.png" alt="Play">';
-        } else {
-            playSong();
-            document.getElementById('play-btn').innerHTML = '<img src="https://img.icons8.com/ios-glyphs/30/ffffff/pause.png" alt="Pause">';
+    function nextSong() {
+        if (currentSongIndex < catalog.length - 1) {
+            playSong(currentSongIndex + 1);
         }
-    });
+    }
 
-    document.getElementById('prev-btn').addEventListener('click', () => {
-        songIndex = (songIndex - 1 + songs.length) % songs.length;
-        loadSong(songs[songIndex]);
-        playSong();
-    });
+    function showSection(section) {
+        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.profile-view').forEach(p => p.style.display = 'none');
+        document.getElementById(section).style.display = 'block';
+    }
 
-    document.getElementById('next-btn').addEventListener('click', () => {
-        songIndex = (songIndex + 1) % songs.length;
-        loadSong(songs[songIndex]);
-        playSong();
-    });
+    function showProfile(index) {
+        const creator = creators[index];
+        const profileView = document.getElementById('profile');
+        const profileMusicGrid = document.getElementById('profile-music');
 
-    // Load the first song initially
-    loadSong(songs[songIndex]);
+        document.getElementById('profile-pic').src = creator.profilePic;
+        document.getElementById('profile-name').innerText = creator.name;
+        profileMusicGrid.innerHTML = ''; // Clear previous songs
+
+        creator.songs.forEach(song => {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.innerHTML = `
+                <img src="${song.cover}" alt="${song.name}">
+                <p>${song.name}</p>
+                <p>${song.artist}</p>
+            `;
+            item.onclick = () => playSong(catalog.findIndex(c => c.src === song.src));
+            profileMusicGrid.appendChild(item);
+        });
+
+        profileView.style.display = 'block';
+        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+    }
+
+    function createPlaylist() {
+        const playlistName = document.getElementById('playlist-name').value;
+        if (playlistName) {
+            const playlistGrid = document.getElementById('playlists-grid');
+            const playlist = document.createElement('div');
+            playlist.classList.add('grid-item');
+            playlist.innerText = playlistName;
+            playlistGrid.appendChild(playlist);
+        }
+    }
 </script>
-
 </body>
 </html>
