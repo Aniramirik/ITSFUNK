@@ -187,8 +187,7 @@
 <div class="container">
     <div class="sidebar">
         <h1>ITSFUNK</h1>
-        <nav>
-            <a href="#" onclick="showSection('catalog')">Music Catalog</a>
+        <nav><a href="#" onclick="showSection('catalog')">Music Catalog</a>
             <a href="#" onclick="showSection('playlists')">My Playlists</a>
             <a href="#" onclick="showSection('creators')">Discover Creators</a>
         </nav>
@@ -197,7 +196,7 @@
     <div class="content">
         <div id="catalog" class="section">
             <h2>Music Catalog</h2>
-            <div class="grid" id="catalog-grid">
+            <div class="grid">
                 <!-- Music catalog items will be inserted here -->
             </div>
         </div>
@@ -215,7 +214,7 @@
 
         <div id="creators" class="section" style="display:none;">
             <h2>Discover Creators</h2>
-            <div class="grid" id="creators-grid">
+            <div class="grid">
                 <!-- Creator profiles will be inserted here -->
             </div>
         </div>
@@ -244,6 +243,7 @@
     <button onclick="nextSong()">&#9654;</button>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.min.js"></script>
 <script>
     const catalog = [
         { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
@@ -254,234 +254,155 @@
         { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" },
         { name: "Big Dawgs", src: "spotifydown.com - Big Dawgs.mp3", cover: "IMG_0023.jpeg", artist: "Hanumankind, Kalmi" },
         { name: "Barbie girl", src: "spotifydown.com - Barbie Girl.mp3", cover: "IMG_5042.jpeg", artist: "AQUA"},
-        { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_0249.jpeg", artist: "Asala" }
+        { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" }, 
+        { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" }, 
+        { name: "Slime Me Up.", src: "spotifydown.com - Slime Me Up.mp3", cover: "IMG_5045.jpeg", artist: "Ralfy The Plug" },
+
+     { name: "Billie Jean", src: "spotifydown.com - Billie Jean.mp3 ", cover: "IMG_5045.jpeg", artist: "Michael Jackson," },
+
+     { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "travis Scott," },
+
     ];
 
-    const playlists = {};
     const creators = [
-        { name: "Creator 1", pic: "https://via.placeholder.com/150", desc: "Music added by Creator 1", music: ["FE!N", "All The Stars"] },
-        { name: "Creator 2", pic: "https://via.placeholder.com/150", desc: "Music added by Creator 2", music: ["World hold on (Themba)", "Guess featuring Billie Eilish"] }
+        {
+            name: "Travis Scott",
+            profilePic: "IMG_0017.png",
+            songs: [
+                { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
+
+   { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "travis Scott," },
+
+            ]
+        },
+        {
+            name: "SZA",
+            profilePic: "IMG_0018.jpeg",
+            songs: [
+                { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" }
+            ]
+        },
+        {
+            name: "Taylor Swift",
+            profilePic: "IMG_0019.jpeg",
+            songs: [
+                { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.png", artist: "Taylor Swift" }
+            ]
+        },
+
+
+       {
+            name: "Adam PORT",
+            profilePic: "IMG_5047.jpeg",
+            songs: [
+              { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" },
+            ]
+        },
+
+
+{
+            name: "Assala",
+            profilePic: "IMG_5046.jpeg",
+            songs: [
+             { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" }, 
+            ]
+        },
+
     ];
 
-    function showSection(sectionId) {
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.display = section.id === sectionId ? 'block' : 'none';
-        });
+    let currentSongIndex = 0;
 
-        if (sectionId === 'creators') {
-            displayCreators();
-        }
-    }
+    // Populate music catalog
+    const catalogGrid = document.querySelector('#catalog .grid');
+    catalog.forEach((song, index) => {
+        const item = document.createElement('div');
+        item.classList.add('grid-item');
+        item.innerHTML = `
+            <img src="${song.cover}" alt="${song.name}">
+            <p>${song.name}</p>
+            <p>${song.artist}</p>
+        `;
+        item.onclick = () => playSong(index);
+        catalogGrid.appendChild(item);
+    });
 
-    function displayCatalog() {
-        const catalogGrid = document.getElementById('catalog-grid');
-        catalogGrid.innerHTML = '';
-        catalog.forEach((item, index) => {
-            const gridItem = document.createElement('div');
-            gridItem.className = 'grid-item';
-            gridItem.innerHTML = `
-                <img src="${item.cover}" alt="${item.name}">
-                <p>${item.name}</p>
-                <button onclick="playSong(${index})">Play</button>
-            `;
-            catalogGrid.appendChild(gridItem);
-        });
-    }
+    // Populate creators grid
+    const creatorsGrid = document.querySelector('#creators .grid');
+    creators.forEach((creator, index) => {
+        const item = document.createElement('div');
+        item.classList.add('grid-item');
+        item.innerHTML = `
+            <img src="${creator.profilePic}" alt="${creator.name}">
+            <p>${creator.name}</p>
+        `;
+        item.onclick = () => showProfile(index);
+        creatorsGrid.appendChild(item);
+    });
 
     function playSong(index) {
         const song = catalog[index];
-        const audioPlayer = document.getElementById('audio-player');
-        const albumCover = document.getElementById('album-cover');
-        const songTitle = document.getElementById('song-title');
-        const songArtist = document.getElementById('song-artist');
+        currentSongIndex = index;
 
-        audioPlayer.src = song.src;
-        albumCover.src = song.cover;
-        songTitle.textContent = song.name;
-        songArtist.textContent = song.artist;
-        audioPlayer.play();
+        document.getElementById('song-title').innerText = song.name;
+        document.getElementById('song-artist').innerText = song.artist;
+        document.getElementById('album-cover').src = song.cover;
+        document.getElementById('audio-player').src = song.src;
+        document.getElementById('audio-player').play();
+    }
+
+    function prevSong() {
+        if (currentSongIndex > 0) {
+            playSong(currentSongIndex - 1);
+        }
+    }
+
+    function nextSong() {
+        if (currentSongIndex < catalog.length - 1) {
+            playSong(currentSongIndex + 1);
+        }
+    }
+
+    function showSection(section) {
+        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.profile-view').forEach(p => p.style.display = 'none');
+        document.getElementById(section).style.display = 'block';
+    }
+
+    function showProfile(index) {
+        const creator = creators[index];
+        const profileView = document.getElementById('profile');
+        const profileMusicGrid = document.getElementById('profile-music');
+
+        document.getElementById('profile-pic').src = creator.profilePic;
+        document.getElementById('profile-name').innerText = creator.name;
+        profileMusicGrid.innerHTML = ''; // Clear previous songs
+
+        creator.songs.forEach(song => {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.innerHTML = `
+                <img src="${song.cover}" alt="${song.name}">
+                <p>${song.name}</p>
+                <p>${song.artist}</p>
+            `;
+            item.onclick = () => playSong(catalog.findIndex(c => c.src === song.src));
+            profileMusicGrid.appendChild(item);
+        });
+
+        profileView.style.display = 'block';
+        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
     }
 
     function createPlaylist() {
         const playlistName = document.getElementById('playlist-name').value;
-        if (!playlistName) return;
-
-        if (playlists[playlistName]) {
-            alert('Playlist already exists.');
-            return;
-        }
-
-        playlists[playlistName] = [];
-        displayPlaylists();
-    }
-
-    function displayPlaylists() {
-        const playlistsGrid = document.getElementById('playlists-grid');
-        playlistsGrid.innerHTML = '';
-
-        for (const [name, songs] of Object.entries(playlists)) {
-            const gridItem = document.createElement('div');
-            gridItem.className = 'grid-item';
-            gridItem.innerHTML = `
-                <p>${name}</p>
-                <button onclick="addToPlaylist('${name}')">Add Song</button>
-                <button onclick="playPlaylist('${name}')">Play Playlist</button>
-                <div>
-                    ${songs.map(songIndex => `
-                        <p>${catalog[songIndex].name}</p>
-                    `).join('')}
-                </div>
-            `;
-            playlistsGrid.appendChild(gridItem);
+        if (playlistName) {
+            const playlistGrid = document.getElementById('playlists-grid');
+            const playlist = document.createElement('div');
+            playlist.classList.add('grid-item');
+            playlist.innerText = playlistName;
+            playlistGrid.appendChild(playlist);
         }
     }
-
-    function addToPlaylist(playlistName) {
-        const songIndex = prompt('Enter song index to add to playlist:');
-        if (songIndex < 0 || songIndex >= catalog.length) return;
-
-        playlists[playlistName].push(songIndex);
-        displayPlaylists();
-    }
-
-    function playPlaylist(playlistName) {
-        const playlist = playlists[playlistName];
-        if (!playlist.length) return;
-
-        let currentSongIndex = 0;
-
-        function playNext() {
-            if (currentSongIndex >= playlist.length) {
-                currentSongIndex = 0;
-            }
-
-            playSong(playlist[currentSongIndex]);
-            currentSongIndex++;
-        }
-
-        document.getElementById('audio-player').addEventListener('ended', playNext);
-        playNext();
-    }
-
-    function displayCreators() {
-        const creatorsGrid = document.getElementById('creators-grid');
-        creatorsGrid.innerHTML = '';
-
-        creators.forEach((creator, index) => {
-            const gridItem = document.createElement('div');
-            gridItem.className = 'grid-item';
-            gridItem.innerHTML = `
-                <img src="${creator.pic}" alt="${creator.name}">
-                <p>${creator.name}</p>
-                <button onclick="viewProfile(${index})">View Profile</button>
-            `;
-            creatorsGrid.appendChild(gridItem);
-        });
-    }
-
-    function viewProfile(index) {
-        const profile = creators[index];
-        document.getElementById('profile-pic').src = profile.pic;
-        document.getElementById('profile-name').textContent = profile.name;
-        document.getElementById('profile-desc').textContent = profile.desc;
-
-        const profileMusic = document.getElementById('profile-music');
-        profileMusic.innerHTML = '';
-        profile.music.forEach(songName => {
-            const song = catalog.find(item => item.name === songName);
-            const gridItem = document.createElement('div');
-            gridItem.className = 'grid-item';
-            gridItem.innerHTML = `
-                <img src="${song.cover}" alt="${song.name}">
-                <p>${song.name}</p>
-                <button onclick="playSong(${catalog.indexOf(song)})">Play</button>
-            `;
-            profileMusic.appendChild(gridItem);
-        });
-
-        document.getElementById('profile').style.display = 'block';
-    }
-let playlists = {}; // Initialize playlists object
-
-// Function to display the playlist grid
-function displayPlaylists() {
-    const playlistsGrid = document.getElementById('playlists-grid');
-    playlistsGrid.innerHTML = '';
-
-    for (const [name, songs] of Object.entries(playlists)) {
-        const gridItem = document.createElement('div');
-        gridItem.className = 'grid-item';
-        gridItem.innerHTML = `
-            <p>${name}</p>
-            <button onclick="addToPlaylist('${name}')">Add Song</button>
-            <button onclick="playPlaylist('${name}')">Play Playlist</button>
-            <div>
-                ${songs.map(songIndex => `
-                    <p>${catalog[songIndex].name}</p>
-                `).join('')}
-            </div>
-        `;
-        playlistsGrid.appendChild(gridItem);
-    }
-}
-
-// Function to create a new playlist
-function createPlaylist() {
-    const playlistName = document.getElementById('playlist-name').value.trim();
-    if (!playlistName) return;
-
-    if (playlists[playlistName]) {
-        alert('Playlist already exists.');
-        return;
-    }
-
-    playlists[playlistName] = [];
-    document.getElementById('playlist-name').value = ''; // Clear input
-    displayPlaylists(); // Refresh the playlist display
-}
-
-// Function to add a song to a playlist
-function addToPlaylist(playlistName) {
-    const songIndex = prompt('Enter song index to add to playlist:');
-    if (songIndex < 0 || songIndex >= catalog.length) {
-        alert('Invalid song index.');
-        return;
-    }
-
-    if (playlists[playlistName].includes(parseInt(songIndex))) {
-        alert('Song already in playlist.');
-        return;
-    }
-
-    playlists[playlistName].push(parseInt(songIndex));
-    displayPlaylists(); // Refresh the playlist display
-}
-
-// Function to play a playlist
-function playPlaylist(playlistName) {
-    const playlist = playlists[playlistName];
-    if (!playlist.length) return;
-
-    let currentSongIndex = 0;
-
-    function playNext() {
-        if (currentSongIndex >= playlist.length) {
-            currentSongIndex = 0; // Loop back to start
-        }
-
-        playSong(playlist[currentSongIndex]);
-        currentSongIndex++;
-    }
-
-    document.getElementById('audio-player').addEventListener('ended', playNext);
-    playNext();
-}
-
-// Call displayPlaylists on page load to show existing playlists
-displayPlaylists();
-    // Initial Display
-    displayCatalog();
 </script>
-
 </body>
 </html>
