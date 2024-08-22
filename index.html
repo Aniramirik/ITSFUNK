@@ -247,37 +247,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.min.js"></script>
 <script>
     const catalog = [
-        { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
-        { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" },
-        { name: "World hold on (Themba)", src: "spotifydown.com - World Hold On - THEMBA Remix.mp3", cover: "IMG_0016.jpeg", artist: "Themba" },
-        { name: "Guess featuring Billie Eilish", src: "spotifydown.com - Guess featuring Billie Eilish.mp3", cover: "IMG_0021.jpeg", artist: "Charli XCX" },
-        { name: "KEHLANI", src: "spotifydown.com - KEHLANI.mp3", cover: "IMG_0022.jpeg", artist: "Jordan Adetunji" },
-        { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.png", artist: "Taylor Swift" },
-        { name: "Big Dawgs", src: "spotifydown.com - Big Dawgs.mp3", cover: "IMG_0023.jpeg", artist: "Hanumankind, Kalmi" },
-    ];
+    { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
+    { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" },
+    { name: "World hold on (Themba)", src: "spotifydown.com - World Hold On - THEMBA Remix.mp3", cover: "IMG_0016.jpeg", artist: "Themba" },
+    { name: "Guess featuring Billie Eilish", src: "spotifydown.com - Guess featuring Billie Eilish.mp3", cover: "IMG_0021.jpeg", artist: "Charli XCX" },
+    { name: "KEHLANI", src: "spotifydown.com - KEHLANI.mp3", cover: "IMG_0022.jpeg", artist: "Jordan Adetunji" },
+    { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" },
+    { name: "Big Dawgs", src: "spotifydown.com - Big Dawgs.mp3", cover: "IMG_0023.jpeg", artist: "Hanumankind, Kalmi" },
+    { name: "Slime Me Up", src: "spotifydown.com - Slime Me Up.mp3", cover: "/mnt/data/cover-image-for-slime.jpg", artist: "Artist Name" }, // Update the artist and cover as needed
+    { name: "Barbie Girl", src: "spotifydown.com - Barbie Girl.mp3", cover: "/mnt/data/CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg", artist: "Aqua" }
+];
 
-    const creators = [
-        {
-            name: "Travis Scott",
-            profilePic: "IMG_0017.Png",
-            songs: [
-                { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" }
-            ]
-        },
-        {
-            name: "SZA",
-            profilePic: "IMG_0018.jpeg",
-            songs: [
-                { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" }
-            ]
-        },
-        {
-            name: "Taylor Swift",
-            profilePic: "IMG_0020.png",
-            songs: [
-                { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" }
-            ]
-        },
+const creators = [
+    { name: "Travis Scott", picture: "IMG_0014.jpeg", music: ["FE!N"] },
+    { name: "SZA", picture: "IMG_0015.jpeg", music: ["All The Stars"] },
+    { name: "Themba", picture: "IMG_0016.jpeg", music: ["World hold on (Themba)"] },
+    { name: "Charli XCX", picture: "IMG_0021.jpeg", music: ["Guess featuring Billie Eilish"] },
+    { name: "Jordan Adetunji", picture: "IMG_0022.jpeg", music: ["KEHLANI"] },
+    { name: "Taylor Swift", picture: "IMG_0020.jpeg", music: ["Cruel Summer"] },
+    { name: "Hanumankind, Kalmi", picture: "IMG_0023.jpeg", music: ["Big Dawgs"] },
+    { name: "Artist Name", picture: "/mnt/data/cover-image-for-slime.jpg", music: ["Slime Me Up"] }, // Update the name and picture as needed
+    { name: "Aqua", picture: "CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg", music: ["Barbie Girl"] }
+];
     ];
 
     let currentSongIndex = 0;
