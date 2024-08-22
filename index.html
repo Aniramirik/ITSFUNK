@@ -401,7 +401,84 @@
 
         document.getElementById('profile').style.display = 'block';
     }
+let playlists = {}; // Initialize playlists object
 
+// Function to display the playlist grid
+function displayPlaylists() {
+    const playlistsGrid = document.getElementById('playlists-grid');
+    playlistsGrid.innerHTML = '';
+
+    for (const [name, songs] of Object.entries(playlists)) {
+        const gridItem = document.createElement('div');
+        gridItem.className = 'grid-item';
+        gridItem.innerHTML = `
+            <p>${name}</p>
+            <button onclick="addToPlaylist('${name}')">Add Song</button>
+            <button onclick="playPlaylist('${name}')">Play Playlist</button>
+            <div>
+                ${songs.map(songIndex => `
+                    <p>${catalog[songIndex].name}</p>
+                `).join('')}
+            </div>
+        `;
+        playlistsGrid.appendChild(gridItem);
+    }
+}
+
+// Function to create a new playlist
+function createPlaylist() {
+    const playlistName = document.getElementById('playlist-name').value.trim();
+    if (!playlistName) return;
+
+    if (playlists[playlistName]) {
+        alert('Playlist already exists.');
+        return;
+    }
+
+    playlists[playlistName] = [];
+    document.getElementById('playlist-name').value = ''; // Clear input
+    displayPlaylists(); // Refresh the playlist display
+}
+
+// Function to add a song to a playlist
+function addToPlaylist(playlistName) {
+    const songIndex = prompt('Enter song index to add to playlist:');
+    if (songIndex < 0 || songIndex >= catalog.length) {
+        alert('Invalid song index.');
+        return;
+    }
+
+    if (playlists[playlistName].includes(parseInt(songIndex))) {
+        alert('Song already in playlist.');
+        return;
+    }
+
+    playlists[playlistName].push(parseInt(songIndex));
+    displayPlaylists(); // Refresh the playlist display
+}
+
+// Function to play a playlist
+function playPlaylist(playlistName) {
+    const playlist = playlists[playlistName];
+    if (!playlist.length) return;
+
+    let currentSongIndex = 0;
+
+    function playNext() {
+        if (currentSongIndex >= playlist.length) {
+            currentSongIndex = 0; // Loop back to start
+        }
+
+        playSong(playlist[currentSongIndex]);
+        currentSongIndex++;
+    }
+
+    document.getElementById('audio-player').addEventListener('ended', playNext);
+    playNext();
+}
+
+// Call displayPlaylists on page load to show existing playlists
+displayPlaylists();
     // Initial Display
     displayCatalog();
 </script>
