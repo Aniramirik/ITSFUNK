@@ -3,180 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITSFUNK Music Player</title>
+    <title>ITSFUNK</title>
     <style>
-        /* General styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #FFFFFF;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
 
         .player-container {
-            background-color: #282828;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            width: 350px;
+            width: 300px;
+            text-align: center;
         }
 
         .album-cover {
             width: 100%;
-            height: 350px;
-            background-size: cover;
-            background-position: center;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .song-info {
-            padding: 20px;
-            color: white;
+            margin-bottom: 20px;
         }
 
-        .song-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .artist-name {
-            font-size: 18px;
-            color: #a1a1a1;
+        .song-info h2, .song-info h3 {
+            margin: 5px 0;
         }
 
         .controls {
             display: flex;
             justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .control-btn {
-            background-color: #1db954;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
             align-items: center;
-            cursor: pointer;
         }
 
-        .control-btn img {
+        .controls button {
+            background-color: #1DB954;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .controls img {
             width: 20px;
             height: 20px;
-        }
-
-        .playlist {
-            background-color: #121212;
-            padding: 20px;
-            border-top: 1px solid #282828;
-        }
-
-        .playlist h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .playlist-item {
-            display: flex;
-            align-items: center;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .playlist-item:hover {
-            background-color: #1db954;
-        }
-
-        .playlist-item img {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            border-radius: 5px;
-        }
-
-        .playlist-item .item-title {
-            font-size: 16px;
-            flex-grow: 1;
-        }
-
-        .playlist-item .item-artist {
-            font-size: 14px;
-            color: #b3b3b3;
         }
     </style>
 </head>
 <body>
 
 <div class="player-container">
-    <div class="album-cover" id="album-cover">
-        <!-- Album cover will be set by JS -->
-    </div>
+    <img id="album-cover" class="album-cover" src="https://via.placeholder.com/300" alt="Album Cover">
     <div class="song-info">
-        <div class="song-title" id="song-title">Song Title</div>
-        <div class="artist-name" id="artist-name">Artist Name</div>
+        <h2 id="song-title">Song Title</h2>
+        <h3 id="artist-name">Artist Name</h3>
     </div>
     <div class="controls">
-        <button class="control-btn" id="prev-btn">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/rewind.png"/>
+        <button id="prev-btn">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/rewind.png" alt="Previous">
         </button>
-        <button class="control-btn" id="play-btn">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png"/>
+        <button id="play-btn">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/play.png" alt="Play">
         </button>
-        <button class="control-btn" id="next-btn">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/fast-forward.png"/>
+        <button id="next-btn">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/fast-forward.png" alt="Next">
         </button>
-    </div>
-    <div class="playlist">
-        <h3>Your Playlist</h3>
-        <div class="playlist-item" onclick="playSong('spotifydown.com - Slime Me Up.mp3', 'Slime Me Up', 'Artist Name 1', 'https://link-to-image-1.com')">
-            <img src="https://link-to-image-1.com" alt="Slime Me Up">
-            <div class="item-title">Slime Me Up</div>
-            <div class="item-artist">Artist Name 1</div>
-        </div>
-        <div class="playlist-item" onclick="playSong('spotifydown.com - Barbie Girl.mp3', 'Barbie Girl', 'Aqua', 'CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg')">
-            <img src="CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg" alt="Barbie Girl">
-            <div class="item-title">Barbie Girl</div>
-            <div class="item-artist">Aqua</div>
-        </div>
     </div>
 </div>
 
 <script>
     let currentSong = null;
 
-    function playSong(file, title, artist, cover) {
+    const songs = [
+        {
+            title: 'Slime Me Up',
+            artist: 'Artist Name 1',
+            src: 'spotifydown.com - Slime Me Up.mp3',
+            cover: 'https://via.placeholder.com/300'
+        },
+        {
+            title: 'Barbie Girl',
+            artist: 'Aqua',
+            src: 'spotifydown.com - Barbie Girl.mp3',
+            cover: 'CCD19392-FAC5-4B5D-B308-1174C057DD7C.jpeg'
+        }
+    ];
+
+    let songIndex = 0;
+
+    function loadSong(song) {
+        document.getElementById('song-title').textContent = song.title;
+        document.getElementById('artist-name').textContent = song.artist;
+        document.getElementById('album-cover').src = song.cover;
         if (currentSong) {
             currentSong.pause();
         }
-        const audio = new Audio(file);
-        currentSong = audio;
-        document.getElementById('song-title').textContent = title;
-        document.getElementById('artist-name').textContent = artist;
-        document.getElementById('album-cover').style.backgroundImage = `url(${cover})`;
-        audio.play();
+        currentSong = new Audio(song.src);
+    }
+
+    function playSong() {
+        currentSong.play();
+    }
+
+    function pauseSong() {
+        currentSong.pause();
     }
 
     document.getElementById('play-btn').addEventListener('click', () => {
-        if (currentSong) {
-            currentSong.paused ? currentSong.play() : currentSong.pause();
+        const isPlaying = currentSong && !currentSong.paused;
+        if (isPlaying) {
+            pauseSong();
+            document.getElementById('play-btn').innerHTML = '<img src="https://img.icons8.com/ios-glyphs/30/ffffff/play.png" alt="Play">';
+        } else {
+            playSong();
+            document.getElementById('play-btn').innerHTML = '<img src="https://img.icons8.com/ios-glyphs/30/ffffff/pause.png" alt="Pause">';
         }
     });
 
     document.getElementById('prev-btn').addEventListener('click', () => {
-        // Add functionality for the previous button
+        songIndex = (songIndex - 1 + songs.length) % songs.length;
+        loadSong(songs[songIndex]);
+        playSong();
     });
 
     document.getElementById('next-btn').addEventListener('click', () => {
-        // Add functionality for the next button
+        songIndex = (songIndex + 1) % songs.length;
+        loadSong(songs[songIndex]);
+        playSong();
     });
+
+    // Load the first song initially
+    loadSong(songs[songIndex]);
 </script>
 
 </body>
