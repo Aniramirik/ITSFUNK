@@ -263,78 +263,43 @@
         { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.png", artist: "Taylor Swift" },
         { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" },
         { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" },
-        { name: "Slime Me Up.", src: "spotifydown.com - Slime Me Up.mp3", cover: "IMG_5045.jpeg", artist: "Ralfy The Plug" },
+        { name: "Slime Me Up", src: "spotifydown.com - Slime Me Up.mp3", cover: "IMG_5045.jpeg", artist: "Ralfy The Plug" },
         { name: "Billie Jean", src: "spotifydown.com - Billie Jean.mp3", cover: "IMG_5044.jpeg", artist: "Michael Jackson" }
     ];
 
-    const creators = [
-        { name: "DJ Travis", pic: "dj_travis.jpg", music: [0, 1] },
-        { name: "SZA Fan", pic: "sza_fan.jpg", music: [2] },
-        { name: "Swiftie", pic: "swiftie.jpg", music: [3] },
-        { name: "Adam Port", pic: "adam_port.jpg", music: [4] },
-        { name: "Assala Official", pic: "assala_official.jpg", music: [5] },
-        { name: "Ralfy Plug", pic: "ralfy_plug.jpg", music: [6] },
-        { name: "MJ Legend", pic: "mj_legend.jpg", music: [7] }
-    ];
-
-    const playlists = [];
-    let currentSongIndex = 0;
-
-    document.addEventListener("DOMContentLoaded", function () {
-        loadCatalog();
-        loadCreators();
-    });
+    let currentSongIndex = -1;
+    const audioPlayer = document.getElementById('audio-player');
+    const songTitle = document.getElementById('song-title');
+    const songArtist = document.getElementById('song-artist');
+    const albumCover = document.getElementById('album-cover');
 
     function loadCatalog() {
-        const catalogGrid = document.querySelector("#catalog .grid");
-        catalogGrid.innerHTML = "";
-
-        catalog.forEach((item, index) => {
-            const gridItem = document.createElement("div");
-            gridItem.classList.add("grid-item");
-            gridItem.onclick = () => playSong(index);
-
-            gridItem.innerHTML = `
-                <img src="${item.cover}" alt="${item.name} Cover">
-                <p>${item.name}</p>
+        const catalogGrid = document.querySelector('#catalog .grid');
+        catalog.forEach((song, index) => {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.innerHTML = `
+                <img src="${song.cover}" alt="${song.name}">
+                <p>${song.name}</p>
+                <p>${song.artist}</p>
             `;
-
-            catalogGrid.appendChild(gridItem);
-        });
-    }
-
-    function loadCreators() {
-        const creatorsGrid = document.getElementById("creators-grid");
-        creatorsGrid.innerHTML = "";
-
-        creators.forEach((creator, index) => {
-            const gridItem = document.createElement("div");
-            gridItem.classList.add("grid-item");
-            gridItem.onclick = () => viewProfile(index);
-
-            gridItem.innerHTML = `
-                <img src="${creator.pic}" alt="${creator.name} Picture">
-                <p>${creator.name}</p>
-            `;
-
-            creatorsGrid.appendChild(gridItem);
+            item.addEventListener('click', () => playSong(index));
+            catalogGrid.appendChild(item);
         });
     }
 
     function playSong(index) {
-        currentSongIndex = index;
-        const song = catalog[index];
-        document.getElementById("song-title").innerText = song.name;
-        document.getElementById("song-artist").innerText = song.artist;
-        document.getElementById("album-cover").src = song.cover;
-        document.getElementById("audio-player").src = song.src;
-        document.getElementById("audio-player").play();
-    }
+        if (index < 0 || index >= catalog.length) return;
 
-    function prevSong() {
-        if (currentSongIndex > 0) {
-            playSong(currentSongIndex - 1);
-        }
+        const song = catalog[index];
+        audioPlayer.src = song.src;
+        audioPlayer.play();
+
+        songTitle.textContent = song.name;
+        songArtist.textContent = song.artist;
+        albumCover.src = song.cover;
+
+        currentSongIndex = index;
     }
 
     function nextSong() {
@@ -343,86 +308,32 @@
         }
     }
 
-    function createPlaylist() {
-        const playlistName = document.getElementById("playlist-name").value.trim();
-        if (playlistName) {
-            playlists.push({ name: playlistName, songs: [] });
-            document.getElementById("playlist-name").value = "";
-            loadPlaylists();
+    function prevSong() {
+        if (currentSongIndex > 0) {
+            playSong(currentSongIndex - 1);
         }
     }
 
-    function loadPlaylists() {
-        const playlistsGrid = document.getElementById("playlists-grid");
-        playlistsGrid.innerHTML = "";
-
-        playlists.forEach((playlist, index) => {
-            const gridItem = document.createElement("div");
-            gridItem.classList.add("grid-item");
-            gridItem.onclick = () => viewPlaylist(index);
-
-            gridItem.innerHTML = `
-                <p>${playlist.name}</p>
-            `;
-
-            playlistsGrid.appendChild(gridItem);
+    function showSection(sectionId) {
+        document.querySelectorAll('.content .section').forEach(section => {
+            section.style.display = 'none';
         });
+        document.getElementById(sectionId).style.display = 'block';
     }
 
-    function viewPlaylist(index) {
-        const playlist = playlists[index];
-        document.getElementById("playlist-songs").style.display = "block";
-        const playlistSongsGrid = document.getElementById("playlist-songs-grid");
-        playlistSongsGrid.innerHTML = "";
-
-        playlist.songs.forEach(songIndex => {
-            const song = catalog[songIndex];
-            const gridItem = document.createElement("div");
-            gridItem.classList.add("grid-item");
-
-            gridItem.innerHTML = `
-                <img src="${song.cover}" alt="${song.name} Cover">
-                <p>${song.name}</p>
-            `;
-
-            playlistSongsGrid.appendChild(gridItem);
-        });
+    function createPlaylist() {
+        const playlistName = document.getElementById('playlist-name').value;
+        if (playlistName) {
+            const playlistsGrid = document.getElementById('playlists-grid');
+            const playlist = document.createElement('div');
+            playlist.classList.add('grid-item');
+            playlist.textContent = playlistName;
+            playlistsGrid.appendChild(playlist);
+            document.getElementById('playlist-name').value = '';
+        }
     }
 
-    function viewProfile(index) {
-        const creator = creators[index];
-        document.getElementById("catalog").style.display = "none";
-        document.getElementById("playlists").style.display = "none";
-        document.getElementById("creators").style.display = "none";
-        document.getElementById("profile").style.display = "block";
-
-        document.getElementById("profile-pic").src = creator.pic;
-        document.getElementById("profile-name").innerText = creator.name;
-
-        const profileMusic = document.getElementById("profile-music");
-        profileMusic.innerHTML = "";
-
-        creator.music.forEach(musicIndex => {
-            const song = catalog[musicIndex];
-            const gridItem = document.createElement("div");
-            gridItem.classList.add("grid-item");
-            gridItem.onclick = () => playSong(musicIndex);
-
-            gridItem.innerHTML = `
-                <img src="${song.cover}" alt="${song.name} Cover">
-                <p>${song.name}</p>
-            `;
-
-            profileMusic.appendChild(gridItem);
-        });
-    }
-
-    function showSection(section) {
-        document.getElementById("catalog").style.display = section === 'catalog' ? "block" : "none";
-        document.getElementById("playlists").style.display = section === 'playlists' ? "block" : "none";
-        document.getElementById("creators").style.display = section === 'creators' ? "block" : "none";
-        document.getElementById("profile").style.display = "none";
-    }
+    loadCatalog();
 </script>
 
 </body>
