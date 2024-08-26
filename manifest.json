@@ -1,0 +1,21 @@
+{
+    "name": "ITSFUNK",
+    "short_name": "ITSFUNK",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#121212",
+    "theme_color": "#1db954",
+    "icons": [
+      {
+        "src": "Music Brand and App Logo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "Music Brand and App Logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
