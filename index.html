@@ -1,193 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITSFUNK</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #fff;
-        }
-
-        /* Main Container */
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 240px;
-            background-color: #000;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-        }
-
-        .sidebar h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #1db954;
-        }
-
-        .sidebar nav a {
-            display: block;
-            color: #b3b3b3;
-            text-decoration: none;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .sidebar nav a:hover {
-            color: #fff;
-        }
-
-        /* Content */
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #1db954;
-            padding-bottom: 10px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .grid-item {
-            background-color: #181818;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
-
-        .grid-item:hover {
-            background-color: #282828;
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .grid-item p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        /* Player */
-        .player {
-            position: fixed;
-            bottom: 0;
-            width: calc(100% - 240px);
-            background-color: #181818;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .player img {
-            width: 60px;
-            height: 60px;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
-
-        .player .song-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .player .song-info p {
-            margin: 0;
-        }
-
-        .player .song-info p.title {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .player .song-info p.artist {
-            font-size: 14px;
-            color: #b3b3b3;
-        }
-
-        .player audio {
-            width: 300px;
-        }
-
-        .player button {
-            background-color: #1db954;
-            border: none;
-            padding: 10px;
-            margin: 0 5px;
-            color: white;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .player button:hover {
-            background-color: #1ed760;
-        }
-
-        .player button:focus {
-            outline: none;
-        }
-
-        /* Profile View */
-        .profile-view {
-            display: none;
-        }
-
-        .profile-view img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .profile-view h3 {
-            margin: 0;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .profile-view p {
-            margin: 0;
-            font-size: 18px;
-            color: #b3b3b3;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ITSFUNK</title>
+        
+        <style>
+            body {
+                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                     margin: 0;
+                     padding: 0;
+                     background-color: #121212;
+                     color: #fff;
+                 }
+         
+                 /* Main Container */
+                 .container {
+                     display: flex;
+                     height: 100vh;
+                 }
+         
+                 /* Sidebar */
+                 .sidebar {
+                     width: 240px;
+                     background-color: #000;
+                     padding: 20px;
+                     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+                 }
+         
+                 .sidebar h1 {
+                     font-size: 24px;
+                     margin-bottom: 20px;
+                     color: #b91d1d;
+                 }
+         
+                 .sidebar nav a {
+                     display: block;
+                     color: #b3b3b3;
+                     text-decoration: none;
+                     margin-bottom: 10px;
+                     font-size: 16px;
+                 }
+         
+                 .sidebar nav a:hover {
+                     color: #fff;
+                 }
+         
+                 /* Content */
+                 .content {
+                     flex-grow: 1;
+                     padding: 20px;
+                     overflow-y: auto;
+                 }
+         
+                 .section {
+                     margin-bottom: 40px;
+                 }
+         
+                 .section h2 {
+                     font-size: 22px;
+                     margin-bottom: 20px;
+                     border-bottom: 2px solid #1db954;
+                     padding-bottom: 10px;
+                 }
+         
+                 .grid {
+                     display: grid;
+                     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                     gap: 15px;
+                 }
+         
+                 .grid-item {
+                     background-color: #181818;
+                     padding: 15px;
+                     border-radius: 8px;
+                     text-align: center;
+                     transition: background-color 0.3s;
+                     cursor: pointer;
+                 }
+         
+                 .grid-item:hover {
+                     background-color: #282828;
+                 }
+         
+                 .grid-item img {
+                     width: 100%;
+                     height: auto;
+                     border-radius: 8px;
+                     margin-bottom: 10px;
+                 }
+         
+                 .grid-item p {
+                     margin: 0;
+                     font-size: 14px;
+                 }
+         
+                 /* Player */
+                 .player {
+                     position: fixed;
+                     bottom: 0;
+                     width: calc(100% - 240px);
+                     background-color: #181818;
+                     padding: 15px 20px;
+                     display: flex;
+                     justify-content: space-between;
+                     align-items: center;
+                     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+                 }
+         
+                 .player img {
+                     width: 60px;
+                     height: 60px;
+                     border-radius: 4px;
+                     margin-right: 15px;
+                 }
+         
+                 .player .song-info {
+                     display: flex;
+                     align-items: center;
+                 }
+         
+                 .player .song-info p {
+                     margin: 0;
+                 }
+         
+                 .player .song-info p.title {
+                     font-size: 16px;
+                     font-weight: bold;
+                 }
+         
+                 .player .song-info p.artist {
+                     font-size: 14px;
+                     color: #b3b3b3;
+                 }
+         
+                 .player audio {
+                     width: 300px;
+                 }
+         
+                 .player button {
+                     background-color: #1db954;
+                     border: none;
+                     padding: 10px;
+                     margin: 0 5px;
+                     color: white;
+                     border-radius: 50%;
+                     cursor: pointer;
+                     transition: background-color 0.3s;
+                 }
+         
+                 .player button:hover {
+                     background-color: #1ed760;
+                 }
+         
+                 .player button:focus {
+                     outline: none;
+                 }
+         
+                 /* Profile View */
+                 .profile-view {
+                     display: none;
+                 }
+         
+                 .profile-view img {
+                     width: 150px;
+                     height: 150px;
+                     border-radius: 50%;
+                     margin-bottom: 20px;
+                 }
+         
+                 .profile-view h3 {
+                     margin: 0;
+                     font-size: 24px;
+                     margin-bottom: 10px;
+                 }
+         
+                 .profile-view p {
+                     margin: 0;
+                     font-size: 18px;
+                     color: #b3b3b3;
+                     margin-bottom: 20px;
+                 }
+                 .grid-item {
+                     cursor: pointer;
+                     margin: 10px;
+                     padding: 10px;
+                     border: 1px solid #ccc;
+                     border-radius: 5px;
+                     text-align: center;
+                 }
+                 .grid-item img {
+                     max-width: 100px;
+                 }
+                 .player {
+                     margin-top: 20px;
+                     text-align: center;
+                 }
+                 .song-info {
+                     display: flex;
+                     align-items: center;
+                     justify-content: center;
+                 }
+                 .song-info img {
+                     border-radius: 50%;
+                     margin-right: 10px;
+                 }
+                 .profile-view img {
+                     max-width: 150px;
+                     border-radius: 50%;
+                 }
+             </style>
+        
+        <!-- iOS specific meta tags -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="ITSFUNK">
+        <link rel="apple-touch-icon" href="Music Brand and App Logo.png"> <!-- App icon -->
+    
+        <!-- Link to manifest.json -->
+        <link rel="manifest" href="manifest.json">
+    </head>
+    
 <body>
 
 <div class="container">
     <div class="sidebar">
         <h1>ITSFUNK</h1>
-        <nav><a href="#" onclick="showSection('catalog')">Music Catalog</a>
+        <nav>
+            <a href="#" onclick="showSection('catalog')">Music Catalog</a>
             <a href="#" onclick="showSection('playlists')">My Playlists</a>
             <a href="#" onclick="showSection('creators')">Discover Creators</a>
         </nav>
@@ -210,16 +250,22 @@
             <div class="grid" id="playlists-grid">
                 <!-- Playlists will be inserted here -->
             </div>
+            <div id="playlist-songs" style="display:none;">
+                <h3>Songs in Playlist</h3>
+                <div class="grid" id="playlist-songs-grid">
+                    <!-- Playlist songs will be inserted here -->
+                </div>
+            </div>
         </div>
 
         <div id="creators" class="section" style="display:none;">
             <h2>Discover Creators</h2>
-            <div class="grid">
+            <div class="grid" id="creators-grid">
                 <!-- Creator profiles will be inserted here -->
             </div>
         </div>
 
-        <div id="profile" class="profile-view">
+        <div id="profile" class="profile-view" style="display:none;">
             <img id="profile-pic" src="" alt="Profile Picture">
             <h3 id="profile-name">Creator Name</h3>
             <p id="profile-desc">Music added by this creator:</p>
@@ -243,23 +289,18 @@
     <button onclick="nextSong()">&#9654;</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.min.js"></script>
 <script>
     const catalog = [
         { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
+        { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "Travis Scott" },
         { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" },
-        { name: "World hold on (Themba)", src: "spotifydown.com - World Hold On - THEMBA Remix.mp3", cover: "IMG_0016.jpeg", artist: "Themba" },
-        { name: "Guess featuring Billie Eilish", src: "spotifydown.com - Guess featuring Billie Eilish.mp3", cover: "IMG_0021.jpeg", artist: "Charli XCX" },
-        { name: "KEHLANI", src: "spotifydown.com - KEHLANI.mp3", cover: "IMG_0022.jpeg", artist: "Jordan Adetunji" },
-        { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.jpeg", artist: "Taylor Swift" },
-        { name: "Big Dawgs", src: "spotifydown.com - Big Dawgs.mp3", cover: "IMG_0023.jpeg", artist: "Hanumankind, Kalmi" },
-        { name: "Barbie girl", src: "spotifydown.com - Barbie Girl.mp3", cover: "IMG_5042.jpeg", artist: "AQUA"},
-        { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" }, 
+        { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.png", artist: "Taylor Swift" },
+        { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" },
+        { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" },
         { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" }, 
         { name: "Slime Me Up.", src: "spotifydown.com - Slime Me Up.mp3", cover: "IMG_5045.jpeg", artist: "Ralfy The Plug" },
 
      { name: "Billie Jean", src: "spotifydown.com - Billie Jean.mp3 ", cover: "IMG_5045.jpeg", artist: "Michael Jackson," },
-
      { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "travis Scott," },
          { name: "Hands Up", src: "Hands Up.mp3", cover: "IMG_5052.jpeg", artist: "Anir,HUMANIST" },
 
@@ -271,9 +312,7 @@
             profilePic: "IMG_0017.png",
             songs: [
                 { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
-
-   { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "travis Scott," },
-
+                { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "Travis Scott" },
             ]
         },
         {
@@ -290,60 +329,156 @@
                 { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.png", artist: "Taylor Swift" }
             ]
         },
-
-
-       {
-            name: "Adam PORT",
+        {
+            name: "Adam Port",
             profilePic: "IMG_5047.jpeg",
             songs: [
-              { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" },
+                { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" },
             ]
         },
-
-
-{
+        {
             name: "Assala",
             profilePic: "IMG_5046.jpeg",
             songs: [
-             { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" }, 
+                { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" }
             ]
-        },
-
+        }
     ];
 
-    let currentSongIndex = 0;
+    let playlists = JSON.parse(localStorage.getItem('playlists')) || [];
+    let currentPlaylistIndex = null;
 
-    // Populate music catalog
-    const catalogGrid = document.querySelector('#catalog .grid');
-    catalog.forEach((song, index) => {
-        const item = document.createElement('div');
-        item.classList.add('grid-item');
-        item.innerHTML = `
-            <img src="${song.cover}" alt="${song.name}">
-            <p>${song.name}</p>
-            <p>${song.artist}</p>
-        `;
-        item.onclick = () => playSong(index);
-        catalogGrid.appendChild(item);
-    });
+    function showSection(sectionId) {
+        document.getElementById('catalog').style.display = 'none';
+        document.getElementById('playlists').style.display = 'none';
+        document.getElementById('creators').style.display = 'none';
+        document.getElementById('profile').style.display = 'none';
 
-    // Populate creators grid
-    const creatorsGrid = document.querySelector('#creators .grid');
-    creators.forEach((creator, index) => {
-        const item = document.createElement('div');
-        item.classList.add('grid-item');
-        item.innerHTML = `
-            <img src="${creator.profilePic}" alt="${creator.name}">
-            <p>${creator.name}</p>
-        `;
-        item.onclick = () => showProfile(index);
-        creatorsGrid.appendChild(item);
-    });
+        document.getElementById(sectionId).style.display = 'block';
 
-    function playSong(index) {
-        const song = catalog[index];
-        currentSongIndex = index;
+        if (sectionId === 'playlists') {
+            updatePlaylists();
+        } else if (sectionId === 'creators') {
+            updateCreators();
+        }
+    }
 
+    function loadCatalog() {
+        const catalogGrid = document.querySelector('#catalog .grid');
+        catalogGrid.innerHTML = '';
+        catalog.forEach((song, index) => {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.innerHTML = `
+                <img src="${song.cover}" alt="${song.name}">
+                <p>${song.name}</p>
+                <p>${song.artist}</p>
+                <button class="add-to-playlist" onclick="addToPlaylist(${index})">Add to Playlist</button>
+            `;
+            item.onclick = () => playSong(index);
+            catalogGrid.appendChild(item);
+        });
+    }
+
+    function createPlaylist() {
+        const playlistName = document.getElementById('playlist-name').value;
+        if (playlistName === '') {
+            alert('Please enter a playlist name.');
+            return;
+        }
+        playlists.push({ name: playlistName, songs: [] });
+        savePlaylists();
+        updatePlaylists();
+        document.getElementById('playlist-name').value = '';
+    }
+
+    function updatePlaylists() {
+        const playlistsGrid = document.getElementById('playlists-grid');
+        playlistsGrid.innerHTML = '';
+        playlists.forEach((playlist, index) => {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.innerHTML = `
+                <p>${playlist.name}</p>
+                <p>${playlist.songs.length} songs</p>
+            `;
+            item.onclick = () => viewPlaylist(index);
+            playlistsGrid.appendChild(item);
+        });
+    }
+
+    function addToPlaylist(songIndex) {
+        const song = catalog[songIndex];
+        if (currentPlaylistIndex !== null) {
+            const playlist = playlists[currentPlaylistIndex];
+            playlist.songs.push(song);
+            savePlaylists();
+            updatePlaylistSongs();
+        }
+    }
+
+    function viewPlaylist(index) {
+        currentPlaylistIndex = index;
+        document.getElementById('playlist-songs').style.display = 'block';
+        updatePlaylistSongs();
+    }
+
+    function updatePlaylistSongs() {
+        const playlistSongsGrid = document.getElementById('playlist-songs-grid');
+        playlistSongsGrid.innerHTML = '';
+        if (currentPlaylistIndex !== null) {
+            const playlist = playlists[currentPlaylistIndex];
+            playlist.songs.forEach((song, songIndex) => {
+                const item = document.createElement('div');
+                item.classList.add('grid-item');
+                item.innerHTML = `
+                    <img src="${song.cover}" alt="${song.name}">
+                    <p>${song.name}</p>
+                    <p>${song.artist}</p>
+                    <button class="play-song" onclick="playSongFromPlaylist(${songIndex})">Play</button>
+                `;
+                playlistSongsGrid.appendChild(item);
+            });
+        }
+    }
+
+    function updateCreators() {
+        const creatorsGrid = document.getElementById('creators-grid');
+        creatorsGrid.innerHTML = '';
+        creators.forEach((creator, index) => {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.innerHTML = `
+                <img src="${creator.profilePic}" alt="${creator.name}">
+                <p>${creator.name}</p>
+            `;
+            item.onclick = () => viewCreator(index);
+            creatorsGrid.appendChild(item);
+        });
+    }
+
+    function viewCreator(index) {
+        const creator = creators[index];
+        document.getElementById('profile-pic').src = creator.profilePic;
+        document.getElementById('profile-name').innerText = creator.name;
+        const profileMusic = document.getElementById('profile-music');
+        profileMusic.innerHTML = '';
+        creator.songs.forEach((song, songIndex) => {
+            const item = document.createElement('div');
+            item.classList.add('grid-item');
+            item.innerHTML = `
+                <img src="${song.cover}" alt="${song.name}">
+                <p>${song.name}</p>
+                <p>${song.artist}</p>
+                <button class="play-song" onclick="playSongFromProfile(${songIndex}, ${index})">Play</button>
+            `;
+            profileMusic.appendChild(item);
+        });
+        document.getElementById('profile').style.display = 'block';
+    }
+
+    function playSongFromProfile(songIndex, creatorIndex) {
+        const song = creators[creatorIndex].songs[songIndex];
         document.getElementById('song-title').innerText = song.name;
         document.getElementById('song-artist').innerText = song.artist;
         document.getElementById('album-cover').src = song.cover;
@@ -351,59 +486,43 @@
         document.getElementById('audio-player').play();
     }
 
-    function prevSong() {
-        if (currentSongIndex > 0) {
-            playSong(currentSongIndex - 1);
+    function playSong(songIndex) {
+        const song = catalog[songIndex];
+        document.getElementById('song-title').innerText = song.name;
+        document.getElementById('song-artist').innerText = song.artist;
+        document.getElementById('album-cover').src = song.cover;
+        document.getElementById('audio-player').src = song.src;
+        document.getElementById('audio-player').play();
+    }
+
+    function playSongFromPlaylist(songIndex) {
+        if (currentPlaylistIndex !== null) {
+            const song = playlists[currentPlaylistIndex].songs[songIndex];
+            document.getElementById('song-title').innerText = song.name;
+            document.getElementById('song-artist').innerText = song.artist;
+            document.getElementById('album-cover').src = song.cover;
+            document.getElementById('audio-player').src = song.src;
+            document.getElementById('audio-player').play();
         }
+    }
+
+    function prevSong() {
+        alert('Previous song');
     }
 
     function nextSong() {
-        if (currentSongIndex < catalog.length - 1) {
-            playSong(currentSongIndex + 1);
-        }
+        alert('Next song');
     }
 
-    function showSection(section) {
-        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-        document.querySelectorAll('.profile-view').forEach(p => p.style.display = 'none');
-        document.getElementById(section).style.display = 'block';
+    function savePlaylists() {
+        localStorage.setItem('playlists', JSON.stringify(playlists));
     }
 
-    function showProfile(index) {
-        const creator = creators[index];
-        const profileView = document.getElementById('profile');
-        const profileMusicGrid = document.getElementById('profile-music');
-
-        document.getElementById('profile-pic').src = creator.profilePic;
-        document.getElementById('profile-name').innerText = creator.name;
-        profileMusicGrid.innerHTML = ''; // Clear previous songs
-
-        creator.songs.forEach(song => {
-            const item = document.createElement('div');
-            item.classList.add('grid-item');
-            item.innerHTML = `
-                <img src="${song.cover}" alt="${song.name}">
-                <p>${song.name}</p>
-                <p>${song.artist}</p>
-            `;
-            item.onclick = () => playSong(catalog.findIndex(c => c.src === song.src));
-            profileMusicGrid.appendChild(item);
-        });
-
-        profileView.style.display = 'block';
-        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    }
-
-    function createPlaylist() {
-        const playlistName = document.getElementById('playlist-name').value;
-        if (playlistName) {
-            const playlistGrid = document.getElementById('playlists-grid');
-            const playlist = document.createElement('div');
-            playlist.classList.add('grid-item');
-            playlist.innerText = playlistName;
-            playlistGrid.appendChild(playlist);
-        }
-    }
+    // Initial load
+    loadCatalog();
+    updatePlaylists();
+    updateCreators();
 </script>
+
 </body>
 </html>
