@@ -1,226 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ITSFUNK</title>
-        
-        <style>
-            body {
-                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                     margin: 0;
-                     padding: 0;
-                     background-color: #121212;
-                     color: #fff;
-                 }
-         
-                 /* Main Container */
-                 .container {
-                     display: flex;
-                     height: 100vh;
-                 }
-         
-                 /* Sidebar */
-                 .sidebar {
-                     width: 240px;
-                     background-color: #000;
-                     padding: 20px;
-                     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-                 }
-         
-                 .sidebar h1 {
-                     font-size: 24px;
-                     margin-bottom: 20px;
-                     color: #b91d1d;
-                 }
-         
-                 .sidebar nav a {
-                     display: block;
-                     color: #b3b3b3;
-                     text-decoration: none;
-                     margin-bottom: 10px;
-                     font-size: 16px;
-                 }
-         
-                 .sidebar nav a:hover {
-                     color: #fff;
-                 }
-         
-                 /* Content */
-                 .content {
-                     flex-grow: 1;
-                     padding: 20px;
-                     overflow-y: auto;
-                 }
-         
-                 .section {
-                     margin-bottom: 40px;
-                 }
-         
-                 .section h2 {
-                     font-size: 22px;
-                     margin-bottom: 20px;
-                     border-bottom: 2px solid #1db954;
-                     padding-bottom: 10px;
-                 }
-         
-                 .grid {
-                     display: grid;
-                     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                     gap: 15px;
-                 }
-         
-                 .grid-item {
-                     background-color: #181818;
-                     padding: 15px;
-                     border-radius: 8px;
-                     text-align: center;
-                     transition: background-color 0.3s;
-                     cursor: pointer;
-                 }
-         
-                 .grid-item:hover {
-                     background-color: #282828;
-                 }
-         
-                 .grid-item img {
-                     width: 100%;
-                     height: auto;
-                     border-radius: 8px;
-                     margin-bottom: 10px;
-                 }
-         
-                 .grid-item p {
-                     margin: 0;
-                     font-size: 14px;
-                 }
-         
-                 /* Player */
-                 .player {
-                     position: fixed;
-                     bottom: 0;
-                     width: calc(100% - 240px);
-                     background-color: #181818;
-                     padding: 15px 20px;
-                     display: flex;
-                     justify-content: space-between;
-                     align-items: center;
-                     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-                 }
-         
-                 .player img {
-                     width: 60px;
-                     height: 60px;
-                     border-radius: 4px;
-                     margin-right: 15px;
-                 }
-         
-                 .player .song-info {
-                     display: flex;
-                     align-items: center;
-                 }
-         
-                 .player .song-info p {
-                     margin: 0;
-                 }
-         
-                 .player .song-info p.title {
-                     font-size: 16px;
-                     font-weight: bold;
-                 }
-         
-                 .player .song-info p.artist {
-                     font-size: 14px;
-                     color: #b3b3b3;
-                 }
-         
-                 .player audio {
-                     width: 300px;
-                 }
-         
-                 .player button {
-                     background-color: #1db954;
-                     border: none;
-                     padding: 10px;
-                     margin: 0 5px;
-                     color: white;
-                     border-radius: 50%;
-                     cursor: pointer;
-                     transition: background-color 0.3s;
-                 }
-         
-                 .player button:hover {
-                     background-color: #1ed760;
-                 }
-         
-                 .player button:focus {
-                     outline: none;
-                 }
-         
-                 /* Profile View */
-                 .profile-view {
-                     display: none;
-                 }
-         
-                 .profile-view img {
-                     width: 150px;
-                     height: 150px;
-                     border-radius: 50%;
-                     margin-bottom: 20px;
-                 }
-         
-                 .profile-view h3 {
-                     margin: 0;
-                     font-size: 24px;
-                     margin-bottom: 10px;
-                 }
-         
-                 .profile-view p {
-                     margin: 0;
-                     font-size: 18px;
-                     color: #b3b3b3;
-                     margin-bottom: 20px;
-                 }
-                 .grid-item {
-                     cursor: pointer;
-                     margin: 10px;
-                     padding: 10px;
-                     border: 1px solid #ccc;
-                     border-radius: 5px;
-                     text-align: center;
-                 }
-                 .grid-item img {
-                     max-width: 100px;
-                 }
-                 .player {
-                     margin-top: 20px;
-                     text-align: center;
-                 }
-                 .song-info {
-                     display: flex;
-                     align-items: center;
-                     justify-content: center;
-                 }
-                 .song-info img {
-                     border-radius: 50%;
-                     margin-right: 10px;
-                 }
-                 .profile-view img {
-                     max-width: 150px;
-                     border-radius: 50%;
-                 }
-             </style>
-        
-        <!-- iOS specific meta tags -->
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name="apple-mobile-web-app-title" content="ITSFUNK">
-        <link rel="apple-touch-icon" href="Music Brand and App Logo.png"> <!-- App icon -->
-    
-        <!-- Link to manifest.json -->
-        <link rel="manifest" href="manifest.json">
-    </head>
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITSFUNK</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #fff;
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background-color: #000;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #b91d1d;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #b3b3b3;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .sidebar nav a:hover {
+            color: #fff;
+        }
+
+        /* Content */
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1db954;
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .grid-item {
+            background-color: #181818;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .grid-item:hover {
+            background-color: #282828;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .grid-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Player */
+        .player {
+            position: fixed;
+            bottom: 0;
+            width: calc(100% - 240px);
+            background-color: #181818;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .player img {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .player .song-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .player .song-info p {
+            margin: 0;
+        }
+
+        .player .song-info p.title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .player .song-info p.artist {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        .player audio {
+            width: 300px;
+        }
+
+        .player button {
+            background-color: #1db954;
+            border: none;
+            padding: 10px;
+            margin: 0 5px;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .player button:hover {
+            background-color: #1ed760;
+        }
+
+        .player button:focus {
+            outline: none;
+        }
+
+        /* Profile View */
+        .profile-view {
+            display: none;
+        }
+
+        .profile-view img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .profile-view h3 {
+            margin: 0;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-view p {
+            margin: 0;
+            font-size: 18px;
+            color: #b3b3b3;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <!-- Apple-specific settings -->
+    <link rel="apple-touch-icon" href="app-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
 <body>
 
 <div class="container">
@@ -297,231 +263,166 @@
         { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.png", artist: "Taylor Swift" },
         { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" },
         { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" },
-        { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" }, 
         { name: "Slime Me Up.", src: "spotifydown.com - Slime Me Up.mp3", cover: "IMG_5045.jpeg", artist: "Ralfy The Plug" },
-
-     { name: "Billie Jean", src: "spotifydown.com - Billie Jean.mp3 ", cover: "IMG_5045.jpeg", artist: "Michael Jackson," },
-     { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "travis Scott," },
-         { name: "Hands Up", src: "Hands Up.mp3", cover: "IMG_5052.jpeg", artist: "Anir,HUMANIST" },
-
+        { name: "Billie Jean", src: "spotifydown.com - Billie Jean.mp3", cover: "IMG_5044.jpeg", artist: "Michael Jackson" }
     ];
 
     const creators = [
-        {
-            name: "Travis Scott",
-            profilePic: "IMG_0017.png",
-            songs: [
-                { name: "FE!N", src: "Fein-(PagalWorld).mp3", cover: "IMG_0014.jpeg", artist: "Travis Scott" },
-                { name: "Goosebumps", src: "spotifydown.com - goosebumps.mp3", cover: "IMG_5050.jpeg", artist: "Travis Scott" },
-            ]
-        },
-        {
-            name: "SZA",
-            profilePic: "IMG_0018.jpeg",
-            songs: [
-                { name: "All The Stars", src: "All-The-Stars---Kendrick-Lamar(musicdownload.cc).mp3", cover: "IMG_0015.jpeg", artist: "SZA" }
-            ]
-        },
-        {
-            name: "Taylor Swift",
-            profilePic: "IMG_0019.jpeg",
-            songs: [
-                { name: "Cruel Summer", src: "spotifydown.com - Cruel Summer.mp3", cover: "IMG_0020.png", artist: "Taylor Swift" }
-            ]
-        },
-        {
-            name: "Adam Port",
-            profilePic: "IMG_5047.jpeg",
-            songs: [
-                { name: "MOVE", src: "spotifydown.com - Move.mp3", cover: "IMG_5047.jpeg", artist: "Adam Port" },
-            ]
-        },
-        {
-            name: "Assala",
-            profilePic: "IMG_5046.jpeg",
-            songs: [
-                { name: "Shokran", src: "اصالة - شكرا مع الكلمات - assala - shokran with lyrics.mp3", cover: "IMG_5046.jpeg", artist: "Assala" }
-            ]
-        }
+        { name: "DJ Travis", pic: "dj_travis.jpg", music: [0, 1] },
+        { name: "SZA Fan", pic: "sza_fan.jpg", music: [2] },
+        { name: "Swiftie", pic: "swiftie.jpg", music: [3] },
+        { name: "Adam Port", pic: "adam_port.jpg", music: [4] },
+        { name: "Assala Official", pic: "assala_official.jpg", music: [5] },
+        { name: "Ralfy Plug", pic: "ralfy_plug.jpg", music: [6] },
+        { name: "MJ Legend", pic: "mj_legend.jpg", music: [7] }
     ];
 
-    let playlists = JSON.parse(localStorage.getItem('playlists')) || [];
-    let currentPlaylistIndex = null;
+    const playlists = [];
+    let currentSongIndex = 0;
 
-    function showSection(sectionId) {
-        document.getElementById('catalog').style.display = 'none';
-        document.getElementById('playlists').style.display = 'none';
-        document.getElementById('creators').style.display = 'none';
-        document.getElementById('profile').style.display = 'none';
-
-        document.getElementById(sectionId).style.display = 'block';
-
-        if (sectionId === 'playlists') {
-            updatePlaylists();
-        } else if (sectionId === 'creators') {
-            updateCreators();
-        }
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        loadCatalog();
+        loadCreators();
+    });
 
     function loadCatalog() {
-        const catalogGrid = document.querySelector('#catalog .grid');
-        catalogGrid.innerHTML = '';
-        catalog.forEach((song, index) => {
-            const item = document.createElement('div');
-            item.classList.add('grid-item');
-            item.innerHTML = `
-                <img src="${song.cover}" alt="${song.name}">
-                <p>${song.name}</p>
-                <p>${song.artist}</p>
-                <button class="add-to-playlist" onclick="addToPlaylist(${index})">Add to Playlist</button>
+        const catalogGrid = document.querySelector("#catalog .grid");
+        catalogGrid.innerHTML = "";
+
+        catalog.forEach((item, index) => {
+            const gridItem = document.createElement("div");
+            gridItem.classList.add("grid-item");
+            gridItem.onclick = () => playSong(index);
+
+            gridItem.innerHTML = `
+                <img src="${item.cover}" alt="${item.name} Cover">
+                <p>${item.name}</p>
             `;
-            item.onclick = () => playSong(index);
-            catalogGrid.appendChild(item);
+
+            catalogGrid.appendChild(gridItem);
         });
     }
 
-    function createPlaylist() {
-        const playlistName = document.getElementById('playlist-name').value;
-        if (playlistName === '') {
-            alert('Please enter a playlist name.');
-            return;
-        }
-        playlists.push({ name: playlistName, songs: [] });
-        savePlaylists();
-        updatePlaylists();
-        document.getElementById('playlist-name').value = '';
-    }
+    function loadCreators() {
+        const creatorsGrid = document.getElementById("creators-grid");
+        creatorsGrid.innerHTML = "";
 
-    function updatePlaylists() {
-        const playlistsGrid = document.getElementById('playlists-grid');
-        playlistsGrid.innerHTML = '';
-        playlists.forEach((playlist, index) => {
-            const item = document.createElement('div');
-            item.classList.add('grid-item');
-            item.innerHTML = `
-                <p>${playlist.name}</p>
-                <p>${playlist.songs.length} songs</p>
-            `;
-            item.onclick = () => viewPlaylist(index);
-            playlistsGrid.appendChild(item);
-        });
-    }
-
-    function addToPlaylist(songIndex) {
-        const song = catalog[songIndex];
-        if (currentPlaylistIndex !== null) {
-            const playlist = playlists[currentPlaylistIndex];
-            playlist.songs.push(song);
-            savePlaylists();
-            updatePlaylistSongs();
-        }
-    }
-
-    function viewPlaylist(index) {
-        currentPlaylistIndex = index;
-        document.getElementById('playlist-songs').style.display = 'block';
-        updatePlaylistSongs();
-    }
-
-    function updatePlaylistSongs() {
-        const playlistSongsGrid = document.getElementById('playlist-songs-grid');
-        playlistSongsGrid.innerHTML = '';
-        if (currentPlaylistIndex !== null) {
-            const playlist = playlists[currentPlaylistIndex];
-            playlist.songs.forEach((song, songIndex) => {
-                const item = document.createElement('div');
-                item.classList.add('grid-item');
-                item.innerHTML = `
-                    <img src="${song.cover}" alt="${song.name}">
-                    <p>${song.name}</p>
-                    <p>${song.artist}</p>
-                    <button class="play-song" onclick="playSongFromPlaylist(${songIndex})">Play</button>
-                `;
-                playlistSongsGrid.appendChild(item);
-            });
-        }
-    }
-
-    function updateCreators() {
-        const creatorsGrid = document.getElementById('creators-grid');
-        creatorsGrid.innerHTML = '';
         creators.forEach((creator, index) => {
-            const item = document.createElement('div');
-            item.classList.add('grid-item');
-            item.innerHTML = `
-                <img src="${creator.profilePic}" alt="${creator.name}">
+            const gridItem = document.createElement("div");
+            gridItem.classList.add("grid-item");
+            gridItem.onclick = () => viewProfile(index);
+
+            gridItem.innerHTML = `
+                <img src="${creator.pic}" alt="${creator.name} Picture">
                 <p>${creator.name}</p>
             `;
-            item.onclick = () => viewCreator(index);
-            creatorsGrid.appendChild(item);
+
+            creatorsGrid.appendChild(gridItem);
         });
     }
 
-    function viewCreator(index) {
-        const creator = creators[index];
-        document.getElementById('profile-pic').src = creator.profilePic;
-        document.getElementById('profile-name').innerText = creator.name;
-        const profileMusic = document.getElementById('profile-music');
-        profileMusic.innerHTML = '';
-        creator.songs.forEach((song, songIndex) => {
-            const item = document.createElement('div');
-            item.classList.add('grid-item');
-            item.innerHTML = `
-                <img src="${song.cover}" alt="${song.name}">
-                <p>${song.name}</p>
-                <p>${song.artist}</p>
-                <button class="play-song" onclick="playSongFromProfile(${songIndex}, ${index})">Play</button>
-            `;
-            profileMusic.appendChild(item);
-        });
-        document.getElementById('profile').style.display = 'block';
-    }
-
-    function playSongFromProfile(songIndex, creatorIndex) {
-        const song = creators[creatorIndex].songs[songIndex];
-        document.getElementById('song-title').innerText = song.name;
-        document.getElementById('song-artist').innerText = song.artist;
-        document.getElementById('album-cover').src = song.cover;
-        document.getElementById('audio-player').src = song.src;
-        document.getElementById('audio-player').play();
-    }
-
-    function playSong(songIndex) {
-        const song = catalog[songIndex];
-        document.getElementById('song-title').innerText = song.name;
-        document.getElementById('song-artist').innerText = song.artist;
-        document.getElementById('album-cover').src = song.cover;
-        document.getElementById('audio-player').src = song.src;
-        document.getElementById('audio-player').play();
-    }
-
-    function playSongFromPlaylist(songIndex) {
-        if (currentPlaylistIndex !== null) {
-            const song = playlists[currentPlaylistIndex].songs[songIndex];
-            document.getElementById('song-title').innerText = song.name;
-            document.getElementById('song-artist').innerText = song.artist;
-            document.getElementById('album-cover').src = song.cover;
-            document.getElementById('audio-player').src = song.src;
-            document.getElementById('audio-player').play();
-        }
+    function playSong(index) {
+        currentSongIndex = index;
+        const song = catalog[index];
+        document.getElementById("song-title").innerText = song.name;
+        document.getElementById("song-artist").innerText = song.artist;
+        document.getElementById("album-cover").src = song.cover;
+        document.getElementById("audio-player").src = song.src;
+        document.getElementById("audio-player").play();
     }
 
     function prevSong() {
-        alert('Previous song');
+        if (currentSongIndex > 0) {
+            playSong(currentSongIndex - 1);
+        }
     }
 
     function nextSong() {
-        alert('Next song');
+        if (currentSongIndex < catalog.length - 1) {
+            playSong(currentSongIndex + 1);
+        }
     }
 
-    function savePlaylists() {
-        localStorage.setItem('playlists', JSON.stringify(playlists));
+    function createPlaylist() {
+        const playlistName = document.getElementById("playlist-name").value.trim();
+        if (playlistName) {
+            playlists.push({ name: playlistName, songs: [] });
+            document.getElementById("playlist-name").value = "";
+            loadPlaylists();
+        }
     }
 
-    // Initial load
-    loadCatalog();
-    updatePlaylists();
-    updateCreators();
+    function loadPlaylists() {
+        const playlistsGrid = document.getElementById("playlists-grid");
+        playlistsGrid.innerHTML = "";
+
+        playlists.forEach((playlist, index) => {
+            const gridItem = document.createElement("div");
+            gridItem.classList.add("grid-item");
+            gridItem.onclick = () => viewPlaylist(index);
+
+            gridItem.innerHTML = `
+                <p>${playlist.name}</p>
+            `;
+
+            playlistsGrid.appendChild(gridItem);
+        });
+    }
+
+    function viewPlaylist(index) {
+        const playlist = playlists[index];
+        document.getElementById("playlist-songs").style.display = "block";
+        const playlistSongsGrid = document.getElementById("playlist-songs-grid");
+        playlistSongsGrid.innerHTML = "";
+
+        playlist.songs.forEach(songIndex => {
+            const song = catalog[songIndex];
+            const gridItem = document.createElement("div");
+            gridItem.classList.add("grid-item");
+
+            gridItem.innerHTML = `
+                <img src="${song.cover}" alt="${song.name} Cover">
+                <p>${song.name}</p>
+            `;
+
+            playlistSongsGrid.appendChild(gridItem);
+        });
+    }
+
+    function viewProfile(index) {
+        const creator = creators[index];
+        document.getElementById("catalog").style.display = "none";
+        document.getElementById("playlists").style.display = "none";
+        document.getElementById("creators").style.display = "none";
+        document.getElementById("profile").style.display = "block";
+
+        document.getElementById("profile-pic").src = creator.pic;
+        document.getElementById("profile-name").innerText = creator.name;
+
+        const profileMusic = document.getElementById("profile-music");
+        profileMusic.innerHTML = "";
+
+        creator.music.forEach(musicIndex => {
+            const song = catalog[musicIndex];
+            const gridItem = document.createElement("div");
+            gridItem.classList.add("grid-item");
+            gridItem.onclick = () => playSong(musicIndex);
+
+            gridItem.innerHTML = `
+                <img src="${song.cover}" alt="${song.name} Cover">
+                <p>${song.name}</p>
+            `;
+
+            profileMusic.appendChild(gridItem);
+        });
+    }
+
+    function showSection(section) {
+        document.getElementById("catalog").style.display = section === 'catalog' ? "block" : "none";
+        document.getElementById("playlists").style.display = section === 'playlists' ? "block" : "none";
+        document.getElementById("creators").style.display = section === 'creators' ? "block" : "none";
+        document.getElementById("profile").style.display = "none";
+    }
 </script>
 
 </body>
